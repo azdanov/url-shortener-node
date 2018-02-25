@@ -1,0 +1,44 @@
+{
+  "name": "url-shortener-node",
+  "version": "0.0.1",
+  "description": "Url shortener made in node for freeCodeCamp",
+  "main": "index.js",
+  "repository": "git@github.com:azdanov/url-shortener-node.git",
+  "author": "Anton Zdanov <azdanov@protonmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "husky": "^0.14.3",
+    "jest": "^22.4.2",
+    "lint-staged": "^7.0.0",
+    "micro-dev": "^2.2.0",
+    "prettier": "^1.10.2"
+  },
+  "engines": {
+    "node": ">=9.0.0"
+  },
+  "dependencies": {
+    "micro": "^9.1.0",
+    "mongoose": "^5.0.7"
+  },
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev ./index.js",
+    "lint": "yarn eslint --color --fix *.js ",
+    "test": "jest",
+    "precommit": "lint-staged && yarn test"
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn run lint",
+      "git add"
+    ]
+  }
+}
