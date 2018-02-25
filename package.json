@@ -25,12 +25,15 @@
     "node": ">=9.0.0"
   },
   "dependencies": {
+    "handlebars": "^4.0.11",
     "micro": "^9.1.0",
+    "microrouter": "^3.0.0",
     "mongoose": "^5.0.7"
   },
   "scripts": {
     "start": "micro",
     "dev": "micro-dev ./index.js",
+    "debug": "node --inspect ./node_modules/.bin/micro-dev -p 3000 -H 0.0.0.0 ./index.js",
     "lint": "yarn eslint --color --fix *.js ",
     "test": "jest",
     "precommit": "lint-staged && yarn test"
