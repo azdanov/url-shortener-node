@@ -1,7 +1,7 @@
 const { send } = require('micro');
 const { router, get } = require('microrouter');
 
-const home = require('./lib/home');
+const home = require('./controllers/home');
 
 const shorten = (req, res) =>
   send(res, 200, `You've submitted ${req.params.linkToShorten}`);
