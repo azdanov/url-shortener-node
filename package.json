@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "handlebars": "^4.0.11",
+    "hashids": "^1.1.4",
     "micro": "^9.1.0",
     "microrouter": "^3.0.0",
     "mongoose": "^5.0.7"
