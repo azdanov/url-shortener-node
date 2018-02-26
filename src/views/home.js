@@ -8,7 +8,7 @@ const readFileAsync = promisify(fs.readFile);
 
 module.exports = async function createHomeView(req) {
   const source = await readFileAsync(
-    path.resolve(__dirname, '..', 'views', 'templates', 'home.hbs'),
+    path.resolve(__dirname, 'templates', 'home.hbs'),
     { encoding: 'utf8' },
   );
   const template = Handlebars.compile(source);
