@@ -29,7 +29,8 @@
     "hashids": "^1.1.4",
     "micro": "^9.1.0",
     "microrouter": "^3.0.0",
-    "mongoose": "^5.0.7"
+    "mongoose": "^5.0.7",
+    "validator": "^9.4.1"
   },
   "scripts": {
     "start": "micro",

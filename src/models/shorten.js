@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle,no-shadow */
 
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const { Schema } = mongoose;
 
@@ -21,7 +22,17 @@ try {
 const UrlSchema = new Schema(
   {
     _id: Number,
-    url: String,
+    url: {
+      type: String,
+      lowercase: true,
+      validate: {
+        validator(url) {
+          return validator.isURL(url);
+        },
+        message: '{VALUE} is not a valid url',
+      },
+      required: [true, 'Invalid url provided'],
+    },
   },
   { timestamps: true },
 );

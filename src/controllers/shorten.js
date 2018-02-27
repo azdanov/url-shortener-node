@@ -1,4 +1,4 @@
-/* eslint-disable no-console,no-underscore-dangle */
+/* eslint-disable no-console */
 
 const { send } = require('micro');
 const Hashids = require('hashids');
@@ -14,16 +14,16 @@ function createJsonResponse(url, req, id) {
 }
 
 const shorten = async (req, res) => {
-  try {
-    const url = req.query.link;
-    if (!url) {
-      send(res, 400, 'Wrong query parameter');
-      return;
-    }
+  const url = req.query.link;
+  if (!url) {
+    send(res, 400, 'Wrong query parameter');
+    return;
+  }
 
+  try {
     const foundDoc = await Url.findOne({ url });
     if (foundDoc) {
-      const shortUrl = createJsonResponse(url, req, foundDoc._id);
+      const shortUrl = createJsonResponse(url, req, foundDoc.id);
 
       send(res, 200, shortUrl);
       return;
@@ -31,11 +31,16 @@ const shorten = async (req, res) => {
 
     const savedDoc = await Url({ url }).save();
     if (savedDoc) {
-      const shortUrl = createJsonResponse(url, req, savedDoc._id);
+      const shortUrl = createJsonResponse(url, req, savedDoc.id);
 
       send(res, 201, shortUrl);
     }
   } catch (err) {
+    if (err.name === 'ValidationError') {
+      console.error('@shorten', err);
+      send(res, 412, `${err.name}: ${err.errors.url.message}`);
+      return;
+    }
     console.error('@shorten', err);
     send(res, 500, 'Database unavailable');
   }
