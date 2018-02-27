@@ -10,7 +10,13 @@ const home = async (req, res) => {
     send(res, 200, homeView);
   } catch (err) {
     console.error('@home', err);
-    send(res, 500);
+    send(
+      res,
+      500,
+      await createHomeView(req, {
+        error: '500: something went wrong',
+      }),
+    );
   }
 };
 

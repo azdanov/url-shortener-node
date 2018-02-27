@@ -46,11 +46,15 @@ const shorten = async (req, res) => {
   } catch (err) {
     if (err.name === 'ValidationError') {
       console.error('@shorten', err);
-      send(res, 412, await createErrorResponse(req, err.errors.url.message));
+      send(
+        res,
+        412,
+        await createErrorResponse(req, `412: ${err.errors.url.message}`),
+      );
       return;
     }
     console.error('@shorten', err);
-    send(res, 500, await createErrorResponse(req, 'Database unavailable'));
+    send(res, 500, await createErrorResponse(req, '500: database unavailable'));
   }
 };
 
