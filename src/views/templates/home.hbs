@@ -24,40 +24,59 @@
   <div class="hero-head">
     <div class="container">
       <h1 class="title">
-        <a href="{{rootUrl}}">Url Shortener</a>
+        <a href="/">Url Shortener</a>
       </h1>
       <h2 class="subtitle">
-        <a href="{{rootUrl}}">Node</a>
+        <a href="/">Node</a>
       </h2>
     </div>
   </div>
 
-  {{#if shortenedUrl}}
-    <div class="hero-body">
+  <div class="hero-body">
+    {{#if error}}
       <div class="container has-text-centered">
-        <a href="{{shortenedUrl}}" class="is-size-1">{{shortenedUrl}}</a>
+        <div class="columns">
+          <div class="column">
+            <p class="title is-3">{{error}}</p>
+          </div>
+        </div>
       </div>
-    </div>
-  {{else}}
-    <div class="hero-body">
+    {{else if short_url}}
+      <div class="container has-text-centered">
+        <div class="columns">
+          {{#if original_url}}
+            <div class="column is-half">
+              <p class="title is-6 has-text-left">Original:</p>
+              <p class="subtitle is-3"><a href="{{original_url}}" class="">{{original_url}}</a>
+              </p>
+            </div>
+          {{/if}}
+          <div class="column is-half">
+            <p class="title is-6 has-text-left">Short:</p>
+            <p class="subtitle is-3"><a href="{{short_url}}" class="">{{short_url}}</a></p>
+          </div>
+        </div>
+      </div>
+    {{else}}
       <div class="container">
         <div class="columns is-mobile">
           <div class="column is-three-fifths-tablet is-offset-one-fifth-tablet">
-            <form action="{{rootUrl}}" method="post">
+            <form action="/shorten" method="get">
               <div class="field has-addons">
                 <div class="control is-expanded">
-                  <input class="input is-medium" type="text" placeholder="Enter a Website Address">
+                  <input class="input is-medium" name="link" type="text"
+                         placeholder="Enter a Website Address" required>
                 </div>
                 <div class="control">
-                  <input type="submit" class="button is-info is-medium">
+                  <input type="submit" class="button is-warning is-medium">
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
-    </div>
-  {{/if}}
+    {{/if}}
+  </div>
 
   <div class="hero-foot">
     <div class="container">
