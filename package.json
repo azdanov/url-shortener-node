@@ -1,6 +1,6 @@
 {
   "name": "url-shortener-node",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Url shortener made in node for freeCodeCamp",
   "main": "index.js",
   "repository": "git@github.com:azdanov/url-shortener-node.git",
