@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const { URL } = require('url');
 const { promisify } = require('util');
 const Handlebars = require('handlebars');
+const { URL } = require('url');
 
 const readFileAsync = promisify(fs.readFile);
 
@@ -12,7 +12,6 @@ module.exports = async function createHomeView(req) {
     { encoding: 'utf8' },
   );
   const template = Handlebars.compile(source);
-
   const url = new URL(req.headers.host);
-  return template({ url });
+  return template({ rootUrl: url });
 };
