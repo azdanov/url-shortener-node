@@ -53,7 +53,7 @@
           {{/if}}
           <div class="column is-half">
             <p class="title is-6 has-text-left">Short:</p>
-            <p class="subtitle is-3"><a href="{{short_url}}">{{short_url}}</a></p>
+            <p class="subtitle is-3"><a href="{{short_url}}">{{root_url}}/{{short_url}}</a></p>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
       <div class="container">
         <div class="columns is-mobile">
           <div class="column is-three-fifths-tablet is-offset-one-fifth-tablet">
-            <form action="/api" method="get">
+            <form action="api" method="get">
               <div class="field has-addons">
                 <div class="control is-expanded">
                   <input class="input is-medium" name="link" type="text"

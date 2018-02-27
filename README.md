@@ -2,24 +2,12 @@
 
 Url Shortener microservice made in node for freeCodeCamp
 
-[Live version]()
+[Live version](https://url-shortener-node-ccqihrxkwo.now.sh/)
 
 Based on [Micro](https://github.com/zeit/micro) http microservice
 server and deployed on [Now](https://zeit.co/now).
 
 ---
-
-**Example Usages:**
-
-[]()
-
-**Example Output:**
-
-```js
-{
-   ...
-}
-```
 
 ## Usage
 

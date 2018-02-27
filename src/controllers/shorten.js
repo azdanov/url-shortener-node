@@ -3,21 +3,10 @@
 const { send } = require('micro');
 const Hashids = require('hashids');
 
-const hashids = new Hashids('', 6);
 const Url = require('../models/shorten');
 const createHomeView = require('../views/home');
 
-function createJsonResponse(url, req, id) {
-  return {
-    original_url: url,
-    short_url: `${req.headers.host}/${hashids.encode(id)}`,
-  };
-}
-
-function createResponse(url, req, foundDoc) {
-  const shortUrl = createJsonResponse(url, req, foundDoc.id);
-  return createHomeView(req, shortUrl);
-}
+const hashids = new Hashids('', 6);
 
 function createErrorResponse(req, message) {
   return createHomeView(req, { error: message });
@@ -33,24 +22,27 @@ const shorten = async (req, res) => {
   try {
     const foundDoc = await Url.findOne({ url });
     if (foundDoc) {
-      const responsePage = await createResponse(url, req, foundDoc);
-      send(res, 200, responsePage);
-      return;
+      res.writeHead(302, {
+        Location: `/result?q=${hashids.encode(foundDoc.id)}&u=${encodeURI(
+          foundDoc.url,
+        )}`,
+      });
+      res.end();
     }
 
     const savedDoc = await Url({ url }).save();
     if (savedDoc) {
-      const responsePage = await createResponse(url, req, savedDoc);
-      send(res, 201, responsePage);
+      res.writeHead(302, {
+        Location: `/result?q=${hashids.encode(savedDoc.id)}&u=${encodeURI(
+          savedDoc.url,
+        )}`,
+      });
+      res.end();
     }
   } catch (err) {
     if (err.name === 'ValidationError') {
       console.error('@shorten', err);
-      send(
-        res,
-        412,
-        await createErrorResponse(req, `412: ${err.errors.url.message}`),
-      );
+      send(res, 412, await createErrorResponse(req, `${err.message}`));
       return;
     }
     console.error('@shorten', err);

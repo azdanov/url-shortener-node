@@ -25,13 +25,13 @@ const UrlSchema = new Schema(
     url: {
       type: String,
       lowercase: true,
+      unique: true,
       validate: {
         validator(url) {
           return validator.isURL(url);
         },
         message: '{VALUE} is not a valid url',
       },
-      required: [true, 'Invalid url provided'],
     },
   },
   { timestamps: true },

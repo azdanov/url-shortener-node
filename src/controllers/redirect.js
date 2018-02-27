@@ -34,7 +34,7 @@ const fetch = async (req, res) => {
       res,
       500,
       await createHomeView(req, {
-        error: '500: something went wrong',
+        error: '500: something went wrong with redirect',
       }),
     );
   }
