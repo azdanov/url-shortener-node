@@ -20,7 +20,7 @@ Yarn or Npm can be used to run the commands.
 
 `yarn dev` to start micro-dev for development.
 
-`yarn dev` to debug micro-dev instance by using [node --inspect](https://nodejs.org/en/docs/inspector/).
+`yarn debug` to debug micro-dev instance by using [node --inspect](https://nodejs.org/en/docs/inspector/).
 
 `yarn start` to serve public directory via micro.
 
